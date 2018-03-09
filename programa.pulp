@@ -1,0 +1,3 @@
+00 001 000     # 2 primeiros: instrucao, 3;4;5 = registro 1, 6;7;8 registro 2
+01 001 001    # isso eh um comentario
+11 010 000    # teste
