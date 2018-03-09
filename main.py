@@ -37,7 +37,6 @@ def print_state():
     print('Dados:', dados)
 
 registradores = [0 for i in range(8)]
-registradores[1] = 1
 
 instructions = [load,
                 lambda n1, n2: n1 + n2,
