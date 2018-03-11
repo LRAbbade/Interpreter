@@ -7,18 +7,16 @@ def decode(line):
 
     return line[:2], line[2:5], line[5:]
 
-def get_register(bin_number):
+def bin2Int(bin_number):
     return int(bin_number, 2)
 
 def process(instruction, val_1, val_2):
-    instr_number = int(instruction, 2)
+    instr_number = bin2Int(instruction)
     instr_type = instructions[instr_number]
+    r = instr_type(val_1, val_2)
 
     if 0 < instr_number < 3:
-        val_1, val_2 = registradores[val_1], registradores[val_2]
-        registradores[0] = instr_type(val_1, val_2)        # pos 0 eh a AC
-    else:
-        instr_type(val_1, val_2)
+        registradores[0] = r
 
 def load(register, memory_pos):
     registradores[register] = dados[memory_pos]
@@ -37,13 +35,12 @@ def print_state():
     print('Dados:', dados)
 
 registradores = [0 for i in range(8)]
+dados = []
 
 instructions = [load,
-                lambda n1, n2: n1 + n2,
-                lambda n1, n2: n1 - n2,
+                lambda n1, n2: registradores[n1] + registradores[n2],
+                lambda n1, n2: registradores[n1] - registradores[n2],
                 save]
-
-dados = []
 
 try:
     program = open('programa.pulp')
@@ -58,13 +55,10 @@ except:
     print('Erro abrindo o programa/dados')
     exit()
 
-print_state()
-
 for pc in program:
     instruction, register_1, register_2 = decode(pc)
-    val_1, val_2 = get_register(register_1), get_register(register_2)
+    val_1, val_2 = bin2Int(register_1), bin2Int(register_2)
     process(instruction, val_1, val_2)
-    print_state()
 
 save_dados()
 program.close()
