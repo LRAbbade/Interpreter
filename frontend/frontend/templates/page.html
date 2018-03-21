@@ -10,10 +10,10 @@
 
     <!-- arrumar o action -->
     <form action="localhost:5000/run">
-        <input type="text" name="instruction" placeholder="Instrução">
-        <input type="text" name="register_1" placeholder="Registro 1">
-        <input type="text" name="register_2" placeholder="Registro 2">
-        <button type="button" name="btnRun">Executar</button>
+        <input pattern="[0-9]{2}" type="text" name="instruction" placeholder="Instrução" required title="A instrução deve ter 2 dígitos">
+        <input pattern="[0-9]{3}" type="text" name="register_1" placeholder="Registro 1" required title="Os registros devem ter 3 dígitos">
+        <input pattern="[0-9]{3}" type="text" name="register_2" placeholder="Registro 2" required title="Os registros devem ter 3 dígitos">
+        <button>Executar</button>
     </form>
 
     <p>Feito em Python, utilizando flask para o frontend.</p>
