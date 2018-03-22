@@ -34,13 +34,21 @@ def save_dados():
         for i in dados:
             data.write(int2StrBin(i) + '\n')
 
+def update_dados(new_dados):
+    global dados
+    dados = [bin2Int(i) for i in new_dados]
+
+def get_dados():
+    return dados
+
+def get_registradores():
+    return registradores
+
 def load_dados():
     try:
         data = open('data.fiction')
-
-        for line in data:
-            val = int(line, 2)
-            dados.append(val)
+        for i in data:
+            dados.append(bin2Int(i))
 
         data.close()
     except:

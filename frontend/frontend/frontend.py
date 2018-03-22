@@ -8,13 +8,13 @@ interpreter.main()
 def root():
 
     context = {
-        'dados':interpreter.dados,
-        'registradores':interpreter.registradores,
+        'dados':interpreter.get_dados(),
+        'registradores':interpreter.get_registradores(),
         'original_instruction':None
     }
 
     if request.method == 'POST':
-        if request.form['instruction'] is not None:
+        if 'instruction' in request.form:
             command = {
                 'instruction':request.form['instruction'],
                 'register_1':request.form['register_1'],
@@ -24,8 +24,8 @@ def root():
             interpreter.execute(**command)
 
             context['original_instruction'] = command
-        elif request.form['D0'] is not None:
-            interpreter.dados = [
+        elif 'load' in request.form:
+            interpreter.update_dados([
                 request.form['D0'],
                 request.form['D1'],
                 request.form['D2'],
@@ -34,11 +34,13 @@ def root():
                 request.form['D5'],
                 request.form['D6'],
                 request.form['D7']
-            ]
+            ])
 
-            context['dados'] = interpreter.dados
-        else:
+            context['dados'] = interpreter.get_dados()
+        elif 'save' in request.form:
             interpreter.save_dados()
+        else:
+            print('Invalid post request')
 
         return render_template('page.html', **context)
     else:
