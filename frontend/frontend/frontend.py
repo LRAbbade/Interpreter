@@ -1,17 +1,45 @@
 from flask import render_template, Flask, request
+import interpreter
+
 app = Flask(__name__)
+interpreter.main()
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def root():
-    return render_template('page.html')
 
-# exemplo de como pegar as infos do form e postar em outro html
-# arrumar agora pra usar o comando em main.py e printar o resultado em run.html
-@app.route('/run', methods=['POST'])
-def show_post():
     context = {
-        'instruction':request.form['instruction'],
-        'register_1':request.form['register_1'],
-        'register_2':request.form['register_2']
+        'dados':interpreter.dados,
+        'registradores':interpreter.registradores,
+        'original_instruction':None
     }
-    return render_template('run.html', **context)
+
+    if request.method == 'POST':
+        if request.form['instruction'] is not None:
+            command = {
+                'instruction':request.form['instruction'],
+                'register_1':request.form['register_1'],
+                'register_2':request.form['register_2']
+            }
+
+            interpreter.execute(**command)
+
+            context['original_instruction'] = command
+        elif request.form['D0'] is not None:
+            interpreter.dados = [
+                request.form['D0'],
+                request.form['D1'],
+                request.form['D2'],
+                request.form['D3'],
+                request.form['D4'],
+                request.form['D5'],
+                request.form['D6'],
+                request.form['D7']
+            ]
+
+            context['dados'] = interpreter.dados
+        else:
+            interpreter.save_dados()
+
+        return render_template('page.html', **context)
+    else:
+        return render_template('page.html', **context)
