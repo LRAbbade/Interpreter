@@ -13,7 +13,8 @@ def bin2Int(bin_number):
 
 def int2StrBin(i):
     b_str = bin(i)
-    return (("0" * (3 - (len(b_str) - 2))) + b_str[2:])
+    b_str = ("0" * (3 - (len(b_str) - 2))) + b_str[2:]
+    return (b_str[-3:])
 
 def process(instruction, val_1, val_2):
     instr_number = bin2Int(instruction)
@@ -67,8 +68,8 @@ registradores = [0 for i in range(8)]
 dados = []
 
 instructions = [load,
-                lambda n1, n2: registradores[n1] + registradores[n2],
-                lambda n1, n2: registradores[n1] - registradores[n2],
+                lambda n1, n2: ((registradores[n1] + registradores[n2]) % 8),
+                lambda n1, n2: ((registradores[n1] - registradores[n2]) % 8),
                 save]
 
 def main():
