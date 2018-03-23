@@ -13,4 +13,3 @@ flask run
 Abra o navegador e acesse:
 ## localhost:5000
 
-Para visualizar a página, [clique aqui](https://lrabbade.github.io/Interpreter/frontend/frontend/templates/page.html)
