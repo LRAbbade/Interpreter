@@ -68,7 +68,7 @@ registradores = [0 for i in range(8)]
 dados = []
 
 instructions = [load,
-                lambda n1, n2: ((registradores[n1] + registradores[n2]) % 8),
+                lambda n1, n2: ((registradores[n1] + registradores[n2]) & 7),
                 lambda n1, n2: ((registradores[n1] - registradores[n2]) % 8),
                 save]
 
