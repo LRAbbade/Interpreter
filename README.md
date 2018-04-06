@@ -13,3 +13,16 @@ flask run
 Abra o navegador e acesse:
 ## localhost:5000
 
+## Para rodar pelo programa pulp:
+
+Descomentar a linha 91 em interpreter.py
+```
+# executar_programa()
+```
+
+e rodar pelo terminal:
+```
+python interpreter.py
+```
+
+Serão executas as instruções em "programa.pulp", e o resultado salvo em "data.fiction"

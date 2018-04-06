@@ -80,12 +80,19 @@ def main():
 
 def executar_programa():
     load_dados()
+    
+    print('Iniciando execução')
+    print('Estado atual:')
+    print_state()
 
     with open('programa.pulp') as pc:
         for line in pc:
             execute(*decode(line))
 
     save_dados()
+    print('Terminado')
+    print('Estado final:')
+    print_state()
 
 # descomentar para rodar pelo programa, deixar comentado para rodar pelo site
-# executar_programa()
+executar_programa()
