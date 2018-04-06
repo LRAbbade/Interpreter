@@ -1,5 +1,8 @@
 import re
 
+# tamanho da memoria
+memory_size = 8
+
 # for using with programa.pulp
 def decode(line):
     line = re.sub(' ', '', line)
@@ -13,8 +16,8 @@ def bin2Int(bin_number):
 
 def int2StrBin(i):
     b_str = bin(i)
-    b_str = ("0" * (3 - (len(b_str) - 2))) + b_str[2:]
-    return (b_str[-3:])
+    b_str = ("0" * (memory_size - (len(b_str) - 2))) + b_str[2:]
+    return (b_str[-memory_size:])
 
 def process(instruction, val_1, val_2):
     instr_number = bin2Int(instruction)
@@ -68,9 +71,21 @@ registradores = [0 for i in range(8)]
 dados = []
 
 instructions = [load,
-                lambda n1, n2: ((registradores[n1] + registradores[n2]) & 7),
-                lambda n1, n2: ((registradores[n1] - registradores[n2]) % 8),
+                lambda n1, n2: ((registradores[n1] + registradores[n2]) & (2 ** memory_size - 1)),
+                lambda n1, n2: ((registradores[n1] - registradores[n2]) % (2 ** memory_size)),
                 save]
 
 def main():
     load_dados()
+
+def executar_programa():
+    load_dados()
+    
+    with open('programa.pulp') as pc:
+        for line in pc:
+            execute(*decode(line))
+
+    save_dados()
+
+# descomentar para rodar pelo programa, deixar comentado para rodar pelo site
+executar_programa()

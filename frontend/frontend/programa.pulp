@@ -1,0 +1,4 @@
+00 001 110      # carrega dados[6] em registradores[1]
+00 010 111      # carrega dados[7] em registradores[2]
+01 001 010      # soma registradores[1] com registradores[2] e salva em registradores[0] por default
+11 000 000      # salva registradores[1] em dados[0]
