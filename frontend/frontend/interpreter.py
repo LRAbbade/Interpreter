@@ -80,7 +80,7 @@ def main():
 
 def executar_programa():
     load_dados()
-    
+
     with open('programa.pulp') as pc:
         for line in pc:
             execute(*decode(line))
@@ -88,4 +88,4 @@ def executar_programa():
     save_dados()
 
 # descomentar para rodar pelo programa, deixar comentado para rodar pelo site
-executar_programa()
+# executar_programa()
