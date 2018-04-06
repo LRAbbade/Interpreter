@@ -80,7 +80,7 @@ def main():
 
 def executar_programa():
     load_dados()
-    
+
     print('Iniciando execução')
     print('Estado atual:')
     print_state()
@@ -95,4 +95,4 @@ def executar_programa():
     print_state()
 
 # descomentar para rodar pelo programa, deixar comentado para rodar pelo site
-executar_programa()
+# executar_programa()
