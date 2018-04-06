@@ -15,7 +15,7 @@ Abra o navegador e acesse:
 
 ## Para rodar pelo programa pulp:
 
-Descomentar a linha 91 em interpreter.py
+Descomentar a linha 98 em interpreter.py
 ```
 # executar_programa()
 ```
