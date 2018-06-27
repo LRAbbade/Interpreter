@@ -1,0 +1,33 @@
+* {
+	box-sizing:border-box;
+	margin:0px;
+	font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+body {
+	background-color: #DADBEA;
+    padding: 50px 150px;
+}
+
+.main-div h1,h2,h3,h4,h5,ul,form {
+    padding-bottom: 20px;
+}
+
+.main-div table {
+    margin: 20px;
+}
+
+.main-div form button {
+    padding: 10px;
+}
+
+td, th {
+    padding: 6px;
+}
+
+.part-sep {
+    border-style: solid none none none;
+    border-width: 8px;
+    padding-top: 6px;
+    margin-top: 50px;
+}
