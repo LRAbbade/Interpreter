@@ -6,10 +6,12 @@ interpreter.main()
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
-
     context = {
         'dados':interpreter.get_dados(),
         'registradores':interpreter.get_registradores(),
+        'cache':interpreter.get_cache(),
+        'cache_dec':interpreter.get_cache_decimal(),
+        'cache_size':interpreter.cache_size,
         'original_instruction':None
     }
 
@@ -22,8 +24,8 @@ def root():
             }
 
             interpreter.execute(**command)
-
             context['original_instruction'] = command
+            context['cache_dec'] = interpreter.get_cache_decimal()
         elif 'load' in request.form:
             interpreter.update_dados([
                 request.form['D0'],
