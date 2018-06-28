@@ -1,4 +1,6 @@
 import re
+from rx import Observable
+from random import randint
 
 # tamanho da memoria
 memory_size = 8
@@ -108,14 +110,31 @@ def get_from_cache(memory_pos):
 
     return get_val_from_cache_pos(cache_pos)
 
+def get_data(memory_pos):
+    cache = Observable \
+        .timer(randint(1000, 2500)) \
+        .map(lambda s: get_from_cache(memory_pos)) \
+        .do_action(lambda s: print('Accessed cache'))
+
+    register = Observable \
+        .timer(randint(1500, 3000)) \
+        .map(lambda s: registradores[memory_pos]) \
+        .do_action(lambda s: print('Accessed main memory'))
+
+    return list(Observable.merge(cache, register).take(1).to_blocking())[0] 
+
 def soma(n1, n2):
-    val_1 = get_from_cache(n1)
-    val_2 = get_from_cache(n2)
+    val_1 = get_data(n1)
+    val_2 = get_data(n2)
+
     return ((val_1 + val_2) & (2 ** memory_size - 1))
 
 def sub(n1, n2):
-    val_1 = get_from_cache(n1)
-    val_2 = get_from_cache(n2)
+    val_1 = get_data(n1)
+    val_2 = get_data(n2)
+    
+    print('sub', (val_1 - val_2))
+
     return ((val_1 - val_2) % (2 ** memory_size))
 
 registradores = [0 for i in range(8)]
@@ -143,4 +162,4 @@ def executar_programa():
     print_state()
 
 # descomentar para rodar pelo programa, deixar comentado para rodar pelo site
-# executar_programa()
+executar_programa()
