@@ -132,8 +132,6 @@ def soma(n1, n2):
 def sub(n1, n2):
     val_1 = get_data(n1)
     val_2 = get_data(n2)
-    
-    print('sub', (val_1 - val_2))
 
     return ((val_1 - val_2) % (2 ** memory_size))
 
