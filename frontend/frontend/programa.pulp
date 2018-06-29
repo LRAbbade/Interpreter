@@ -2,8 +2,8 @@
 00 010 010
 00 011 011
 00 100 100
-00 101 101
-01 100 011
-01 100 101
-00 101 000
-01 101 100
+00 101 101 # carrega a galera
+01 100 011 # soma 4 e 3
+01 100 101 # soma 4 e 5 (deve dar hit em 4 e miss em 5)
+00 101 000 # sobreescreve 5 (bit valid do 5 deve virar 0)
+01 101 100 # soma 5 com 4 (deve dar hit em 4 e miss em 5 pq 5 foi sobreescrito)

@@ -143,4 +143,4 @@ def executar_programa():
     print_state()
 
 # descomentar para rodar pelo programa, deixar comentado para rodar pelo site
-# executar_programa()
+executar_programa()
