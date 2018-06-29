@@ -96,7 +96,7 @@ def get_cache_pos_tag(cache_pos):
     return bin2Int(cache[cache_pos][1:4])
 
 def check_cache_pos_valid(cache_pos):
-    return cache[cache_pos][0]
+    return int(cache[cache_pos][0])
 
 def get_from_cache(memory_pos):
     cache_pos = memory_pos % cache_size
@@ -131,10 +131,10 @@ def executar_programa():
 
     print('Iniciando execução')
     print('Estado atual:')
-    print_state()
 
     with open('programa.pulp') as pc:
         for line in pc:
+            print_state()
             execute(*decode(line))
 
     save_dados()
